@@ -23,14 +23,25 @@ namespace LIstMaker.Controllers
         {
             _context = context;
         }
-
+        /*
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
             return await _context.Users.ToListAsync();
-        }
+        }*/
 
+        [HttpGet("ids")]
+        public async Task<ActionResult<IEnumerable<int>>> GetIds()
+        {
+            var ids = await _context.Users.Select(x => x.Id).ToListAsync();
+            return ids;
+        }
+        [HttpGet("admin")]
+        public async Task<ActionResult<bool>> checkForAdmin()
+        {
+            return await UserExists("admin");
+        }
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
@@ -80,13 +91,13 @@ namespace LIstMaker.Controllers
         public async Task<ActionResult<User>> LogIn(LogInDto loginDto)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
-            if(user == null)
+            if (user == null)
             {
                 return Unauthorized("Username does not exist!");
             }
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var compuateHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password!));
-            for(int i = 0;  i < compuateHash.Length; i++)
+            for (int i = 0; i < compuateHash.Length; i++)
             {
                 if (compuateHash[i] != user.PasswordHash[i]) return Unauthorized("Bad Password!");
             }
@@ -100,7 +111,7 @@ namespace LIstMaker.Controllers
             if (user == null) { return Unauthorized("Invalid Username"); }
             using var hmac = new HMACSHA512(user.PasswordSalt);
             var compuateHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(resetPasswordDto.CurrentPassword!));
-            for(int i = 0; i < compuateHash.Length; i++)
+            for (int i = 0; i < compuateHash.Length; i++)
             {
                 if (compuateHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password!");
             }
@@ -123,7 +134,7 @@ namespace LIstMaker.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<User>> RegisterUser(RegisterDto registerDto)
         {
-            if ( await UserExists(registerDto.UserName!))
+            if (await UserExists(registerDto.UserName!))
             {
                 return BadRequest("Username Is Taken!");
             }
@@ -140,6 +151,7 @@ namespace LIstMaker.Controllers
 
             return user;
         }
+        /*
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
@@ -154,8 +166,22 @@ namespace LIstMaker.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }*/
+        [HttpDelete("DeleteUser")]
+        public async Task<IActionResult> DeleteUser(DeleteUserDto dto)
+        {
+            var reqUser = await _context.Users.FindAsync(dto.reqUserId);
+            if(reqUser.isAdmin == false)
+            {
+                return Unauthorized("Unauthorized Request!");
+            }
+            var user = await _context.Users.FindAsync(dto.Id);
+            if (user == null) return NotFound();
+            if (user.UserName == "admin") return Unauthorized("Cannot delete Admin!");
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
-
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);
