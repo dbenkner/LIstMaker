@@ -10,6 +10,8 @@ using LIstMaker.Models;
 using LIstMaker.DTOs;
 using System.Security.Cryptography;
 using System.Text;
+using Xunit;
+
 
 namespace LIstMaker.Controllers
 {
@@ -171,7 +173,7 @@ namespace LIstMaker.Controllers
         public async Task<IActionResult> DeleteUser(DeleteUserDto dto)
         {
             var reqUser = await _context.Users.FindAsync(dto.reqUserId);
-            if(reqUser.isAdmin == false)
+            if(reqUser == null || !reqUser.isAdmin)
             {
                 return Unauthorized("Unauthorized Request!");
             }

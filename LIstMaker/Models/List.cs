@@ -17,6 +17,5 @@ namespace LIstMaker.Models
         public virtual User? User { get; set; }
         public int ListCategoryId { get; set; }
         public virtual ListCategory? ListCategory { get; set; }
-        public virtual List<ListItem>? ListItems { get; set; }
     }
 }

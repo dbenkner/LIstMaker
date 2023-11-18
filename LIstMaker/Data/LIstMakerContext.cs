@@ -15,5 +15,8 @@ namespace LIstMaker.Data
         }
 
         public DbSet<LIstMaker.Models.User> Users { get; set; } = default!;
+        public DbSet<ListMaker.Models.ListCategory> ListCategories { get; set; } = default!;
+        public DbSet<LIstMaker.Models.List> Lists { get; set; } = default!;
+        public DbSet<ListMaker.Models.ItemCategory> ItemCategories { get; set; }
     }
 }
