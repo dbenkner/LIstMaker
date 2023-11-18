@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ListMaker.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -14,7 +15,8 @@ namespace LIstMaker.Models
         public decimal Total { get; set; }
         public int UserId { get; set; }
         public virtual User? User { get; set; }
-        public int 
+        public int ListCategoryId { get; set; }
+        public virtual ListCategory? ListCategory { get; set; }
         public virtual List<ListItem>? ListItems { get; set; }
     }
 }
