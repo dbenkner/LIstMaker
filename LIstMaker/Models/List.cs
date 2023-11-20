@@ -7,7 +7,7 @@ namespace LIstMaker.Models
 {
     public class List
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         [StringLength(50)]
         public string Name { get; set; } = string.Empty;
         public DateTime DateCreated { get; set; } = DateTime.Now;
@@ -17,5 +17,6 @@ namespace LIstMaker.Models
         public virtual User? User { get; set; }
         public int ListCategoryId { get; set; }
         public virtual ListCategory? ListCategory { get; set; }
+        public virtual List<ListItem>? ListItems { get; set; }
     }
 }

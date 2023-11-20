@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using LIstMaker.Data;
 using LIstMaker.Models;
+using ListMaker.DTOs;
+using ListMaker.Models;
 
 namespace ListMaker.Controllers
 {
@@ -32,7 +34,7 @@ namespace ListMaker.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<List>> GetList(int id)
         {
-            var list = await _context.Lists.FindAsync(id);
+            var list = await _context.Lists.Where(x => x.Id == id).Include(x => x.User).SingleOrDefaultAsync();
 
             if (list == null)
             {
@@ -41,7 +43,15 @@ namespace ListMaker.Controllers
 
             return list;
         }
+        // GET: api/lists/userId/
+        [HttpGet("userId/{userId}")]
+        public async Task<ActionResult<IEnumerable<List>>> GetListByUserId(int userId)
+        {
+            var lists = await _context.Lists.Where(x => x.UserId == userId).Include(x => x.User).Include(x => x.ListItems).ToListAsync();
+            if (lists == null) return NotFound();
 
+            return lists;
+        }
         // PUT: api/Lists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -76,8 +86,15 @@ namespace ListMaker.Controllers
         // POST: api/Lists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<List>> PostList(List list)
+        public async Task<ActionResult<List>> PostList(CreateListDto listDto)
         {
+            List list = new List() { 
+                Name = listDto.Name,
+                ListCategoryId = listDto.ListCategoryId,
+                DateCreated = DateTime.Now,
+                Total = listDto.Total,
+                UserId = listDto.UserId
+            };
             _context.Lists.Add(list);
             await _context.SaveChangesAsync();
 
