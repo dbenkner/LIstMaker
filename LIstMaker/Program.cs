@@ -4,6 +4,7 @@ using LIstMaker.Data;
 using LIstMaker.Controllers;
 using LIstMaker.DTOs;
 using Xunit;
+using ListMaker;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ app.UseAuthorization();
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.MapControllers();
+
+OnStartup.CheckForAdmin(app);
 
 app.Run();
 
