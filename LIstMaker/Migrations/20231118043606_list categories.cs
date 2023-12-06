@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace LIstMaker.Migrations
+namespace ListMaker.Migrations
 {
     /// <inheritdoc />
     public partial class listcategories : Migration

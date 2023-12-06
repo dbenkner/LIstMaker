@@ -1,4 +1,4 @@
-﻿namespace LIstMaker.DTOs
+﻿namespace ListMaker.DTOs
 {
     public class DeleteUserDto
     {

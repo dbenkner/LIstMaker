@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LIstMaker\ListMaker.csproj" />
+    <ProjectReference Include="..\ListMaker\ListMaker.csproj" />
   </ItemGroup>
 
 </Project>

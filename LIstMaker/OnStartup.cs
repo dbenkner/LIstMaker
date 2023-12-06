@@ -1,5 +1,5 @@
-﻿using LIstMaker.Data;
-using LIstMaker.Models;
+﻿using ListMaker.Data;
+using ListMaker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Text;
 using System.Security.Cryptography;
@@ -14,7 +14,7 @@ namespace ListMaker
         {
             using var scope = App.Services.CreateScope();
             var services = scope.ServiceProvider;
-            var context = services.GetService<LIstMakerContext>();
+            var context = services.GetService<ListMakerContext>();
             var logger = services.GetService<ILogger<OnStartup>>();
             if(!context.Users.Where(u => u.UserName == "admin").Any())
             {

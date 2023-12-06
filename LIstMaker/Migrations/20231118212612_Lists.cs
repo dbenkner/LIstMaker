@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LIstMaker.Migrations
+namespace ListMaker.Migrations
 {
     /// <inheritdoc />
     public partial class Lists : Migration

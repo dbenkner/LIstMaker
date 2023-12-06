@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LIstMaker.DTOs
+namespace ListMaker.DTOs
 {
     public class ResetPasswordDto
     {

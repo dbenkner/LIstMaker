@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace LIstMaker.Models
+namespace ListMaker.Models
 {
     public class ListItem
     {

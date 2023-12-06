@@ -5,23 +5,23 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LIstMaker.Data;
-using LIstMaker.Models;
-using LIstMaker.DTOs;
+using ListMaker.Data;
+using ListMaker.Models;
+using ListMaker.DTOs;
 using System.Security.Cryptography;
 using System.Text;
 using Xunit;
 
 
-namespace LIstMaker.Controllers
+namespace ListMaker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly LIstMakerContext _context;
+        private readonly ListMakerContext _context;
 
-        public UsersController(LIstMakerContext context)
+        public UsersController(ListMakerContext context)
         {
             _context = context;
         }

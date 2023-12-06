@@ -1,4 +1,4 @@
-﻿using LIstMaker.Models;
+﻿using ListMaker.Models;
 using ListMaker.Models;
 namespace ListMaker.DTOs
 {

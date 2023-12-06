@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace LIstMaker.Models
+namespace ListMaker.Models
 {
     [Index("UserName", IsUnique = true)]
     public class User

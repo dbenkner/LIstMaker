@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using LIstMaker.Data;
+using ListMaker.Data;
 using ListMaker.Models;
 
 namespace ListMaker.Controllers
@@ -14,9 +14,9 @@ namespace ListMaker.Controllers
     [ApiController]
     public class ItemCategoriesController : ControllerBase
     {
-        private readonly LIstMakerContext _context;
+        private readonly ListMakerContext _context;
 
-        public ItemCategoriesController(LIstMakerContext context)
+        public ItemCategoriesController(ListMakerContext context)
         {
             _context = context;
         }

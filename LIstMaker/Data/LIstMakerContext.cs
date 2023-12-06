@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using LIstMaker.Models;
+using ListMaker.Models;
 
-namespace LIstMaker.Data
+namespace ListMaker.Data
 {
-    public class LIstMakerContext : DbContext
+    public class ListMakerContext : DbContext
     {
-        public LIstMakerContext (DbContextOptions<LIstMakerContext> options)
+        public ListMakerContext (DbContextOptions<ListMakerContext> options)
             : base(options)
         {
         }
 
-        public DbSet<LIstMaker.Models.User> Users { get; set; } = default!;
+        public DbSet<ListMaker.Models.User> Users { get; set; } = default!;
         public DbSet<ListMaker.Models.ListCategory> ListCategories { get; set; } = default!;
-        public DbSet<LIstMaker.Models.List> Lists { get; set; } = default!;
+        public DbSet<ListMaker.Models.List> Lists { get; set; } = default!;
         public DbSet<ListMaker.Models.ItemCategory> ItemCategories { get; set; }
     }
 }
